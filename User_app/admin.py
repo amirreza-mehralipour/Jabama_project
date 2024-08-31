@@ -1,3 +1,7 @@
-from django.contrib import admin
+from django.contrib.admin import register, ModelAdmin
+from .models import JabamaUser
 
-# Register your models here.
+
+@register(JabamaUser)
+class JabamaUserAdmin(ModelAdmin):
+    pass
