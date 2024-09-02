@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 
-class JabamaUsers(User, models.Model):
+class JabamaUser(AbstractUser):
     rule_choices = [
         ('S', 'Seller'),
         ('B', 'Buyer'),

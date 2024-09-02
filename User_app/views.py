@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .serializers import JabamaUsersSerializer
-from .models import JabamaUsers
+from .models import JabamaUser
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
@@ -14,10 +14,10 @@ class Refresh(TokenRefreshView):
 
 
 class ListCreateUser(ListCreateAPIView):
-    queryset = JabamaUsers.objects.all()
+    queryset = JabamaUser.objects.all()
     serializer_class = JabamaUsersSerializer
 
 
 class RetrieveUpdateDestroyUser(RetrieveUpdateDestroyAPIView):
-    queryset = JabamaUsers
+    queryset = JabamaUser
     serializer_class = JabamaUsersSerializer

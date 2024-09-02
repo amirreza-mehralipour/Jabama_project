@@ -1,7 +1,7 @@
 from django.contrib.admin import register, ModelAdmin
-from .models import JabamaUsers
+from .models import JabamaUser
 
 
-@register(JabamaUsers)
+@register(JabamaUser)
 class JabamaUsersAdmin(ModelAdmin):
     pass
