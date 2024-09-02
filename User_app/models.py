@@ -10,3 +10,6 @@ class JabamaUsers(User, models.Model):
 
 
     jabama_rule = models.CharField(max_length= 1, choices= rule_choices)
+
+    def __str__(self) -> str:
+        return self.username
