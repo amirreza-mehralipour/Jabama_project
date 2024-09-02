@@ -1,4 +1,8 @@
 from django.urls import path
+from .views import *
 
 
-urlpa
+urlpatterns = [
+    path('sales/', ListCreateSale.as_view()),
+    path('sales/change/<int:pk>/', RetrieveUpdateDestroySales.as_view()),
+]
