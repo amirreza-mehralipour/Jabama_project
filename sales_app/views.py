@@ -3,7 +3,7 @@ from .serializers import *
 from .models import *
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
-from django import filters
+from rest_framework import filters
 
 
 class ListCreateSale(ListCreateAPIView):

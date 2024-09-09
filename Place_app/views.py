@@ -4,7 +4,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
 from django_filters.rest_framework import DjangoFilterBackend
-from django import filters
+from rest_framework import filters
 
 class ListCreatePlace(ListCreateAPIView):
     queryset = Place.objects.all()
