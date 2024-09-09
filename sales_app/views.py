@@ -2,12 +2,21 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from .serializers import *
 from .models import *
 from rest_framework.permissions import IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
+from django import filters
 
 
 class ListCreateSale(ListCreateAPIView):
     queryset = Sales.objects.all()
     serializer_class = SaleSerializer
     permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
+    ordering_fields = ["advertisement__price", "advertisement__start_time"]
+    search_fields = [
+        "advertisement__place__addres", 
+        "advertisement__place__owner__username", 
+        "advertisement__price"
+    ]
 
     def get_queryset(self):
         return Sales.objects.filter(customer = self.request.user)

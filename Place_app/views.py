@@ -3,12 +3,17 @@ from .serializers import *
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
-
+from django_filters.rest_framework import DjangoFilterBackend
+from django import filters
 
 class ListCreatePlace(ListCreateAPIView):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
     permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
+    filterset_fields = ['capacity']  
+    search_fields = ['addres', 'owner__username'] 
+    ordering_fields = ['capacity'] 
 
     def get_queryset(self):
         return Place.objects.filter(owner = self.request.user)
