@@ -3,6 +3,7 @@ from django.db import models
 from User_app.models import *
 from Place_app.models import Place, Advertisement
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Sales(models.Model):
     customer = models.ForeignKey(JabamaUser, on_delete= models.PROTECT)
@@ -25,3 +26,12 @@ class Sales(models.Model):
         verbose_name = 'sale'
         verbose_name_plural = 'Sales'
 
+
+class Rating(models.Model):
+    user = models.ForeignKey(JabamaUser, on_delete= models.PROTECT)
+    sale = models.ForeignKey(Sales, on_delete= models.PROTECT)
+    rate = models.IntegerField(validators= [
+        MaxValueValidator(1, message='rating must be between 1-5'),
+        MaxValueValidator(5, message='rating must be between 1-5')
+    ])
+    comment = models.TextField()

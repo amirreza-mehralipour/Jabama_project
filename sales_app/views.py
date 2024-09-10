@@ -1,7 +1,7 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .serializers import *
 from .models import *
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 
@@ -43,3 +43,14 @@ class RetrieveUpdateDestroySales(RetrieveUpdateDestroyAPIView):
             raise ValidationError("You do not have permission to delete this sale.")
         instance.delete()
 
+
+class ListCreateRating(ListCreateAPIView):
+    queryset = Rating.objects.all()
+    serializer_class = RatingSerializer
+    
+    def get_permissions(self):
+        if self.request.method == "POST":
+            self.permission_classes = [IsAuthenticated]
+        elif self.request.method == "GET":
+            self.permission_classes = [AllowAny]
+        return super(ListCreateRating, self).get_permissions()

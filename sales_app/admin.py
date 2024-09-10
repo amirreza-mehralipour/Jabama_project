@@ -6,3 +6,7 @@ class SalesAdmin(ModelAdmin):
     pass
 
 
+@register(Rating)
+class RatingAdmin(ModelAdmin):
+    pass
+
